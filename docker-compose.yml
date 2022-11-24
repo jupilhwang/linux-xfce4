@@ -1,0 +1,21 @@
+---
+version: "3"
+services:
+  webtop:
+    image: lscr.io/linuxserver/webtop:arch-xfce
+    container_name: webtop
+    privileged: true
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Seoul
+      - SUBFOLDER=/
+    volumes:
+      - .:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 3000:3000
+    shm_size: "2gb"
+    restart: unless-stopped
